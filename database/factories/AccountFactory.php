@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Database\Factories\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Account>
@@ -20,8 +22,10 @@ class AccountFactory extends Factory
     public function definition(): array
     {
         return [
-            //static::$password ??= Hash::make('password')
-            //'user_id' => User::factory()
+            'account_name' => fake()->name(),
+            'account_email' => fake()->unique()->safeEmail(),
+            'account_password' => static::$password?? Hash::make('password'),
+            'user_id' => User::factory()->create()->id
         ];
     }
 }
