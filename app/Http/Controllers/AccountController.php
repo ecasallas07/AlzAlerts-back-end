@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
+use App\Http\Resources\AccountCollection;
+use App\Filters\AccountFilter;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    //El index recibe un request para filtrar por elemento
+    public function index(Request $request)
     {
-        //
+        $filter = new AccountFilter();
+        $queryItems = $filter->transform($request);
+        //Params 
+        $accounts = Account::where($queryItems);
+        return new AccountCollection($accounts->paginate()->appends($request->query()));
     }
 
     /**

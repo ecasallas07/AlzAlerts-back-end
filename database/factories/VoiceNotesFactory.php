@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\User;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\VoiceNotes>
  */
@@ -17,7 +17,9 @@ class VoiceNotesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'voice_note_title' => fake()->title(),
+            'voice_note_description' => fake()->paragraph(),
+            'user_id' => User::factory() 
         ];
     }
 }
