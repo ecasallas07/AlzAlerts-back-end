@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Group of routes 
-Route::group(['prefix' =>'v1', 'namespace' => 'App\Htpp\Controllers'], function()
+Route::group(['prefix' =>'v1'], function()
 {
     Route::apiResource('accounts',AccountController::class);
 });

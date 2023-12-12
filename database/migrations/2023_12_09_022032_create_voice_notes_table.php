@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('voice_note_title')->nullable();
             $table->text('voice_note_description')->nullable();
-            $table->varbinary('voice_note_audio');
+            $table->binary('voice_note_audio')->nullable();
             $table->integer('user_id')->nullable();
             $table->timestamps();
         });

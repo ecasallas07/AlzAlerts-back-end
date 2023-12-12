@@ -20,14 +20,14 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $faker->addProvider(new PicsumPhotosProvider($faker));
+        $this->faker->addProvider(new PicsumPhotosProvider($this->faker));
         return [
             'user_name' => fake()->name(),
             'user_telephone' => fake()->phoneNumber(),
             'user_email' => fake()->unique()->safeEmail(),
             'user_birth_date' => fake()->date(),
-            'user_status' => fake()->randomElements([0,1]),
-            'user_photo' =>  $faker->picsumUrl(300, 300),
+            'user_status' => fake()->randomElement(['0','1']),
+            'user_photo' =>  $this->faker->imageUrl(300,100, 88,true, 3, 'webp'),
             'email_verified_at' => now()
         ];
     }
