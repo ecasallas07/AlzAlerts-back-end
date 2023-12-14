@@ -5,7 +5,7 @@ namespace App\Filters;
 use Illuminate\Http\Request;
 use App\Filters\ApiFilter;
 
-class GalarieFilter extends ApiFilter {
+class GalaryFilter extends ApiFilter {
 
 
     protected $safeParams = [

@@ -14,6 +14,11 @@ class VoiceNotesCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "title" => $this->voice_note_title,
+            "description" => $this->voice_note_description,
+            "audio" => $this->voice_note_audio,
+            "user" => $this->user
+        ];
     }
 }

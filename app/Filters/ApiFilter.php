@@ -41,5 +41,6 @@ class ApiFilter {
 
         return $eloQuery;
     }
+
 }
 

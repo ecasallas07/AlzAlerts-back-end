@@ -14,6 +14,21 @@ class UserCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        if($this->status == 1)
+        {
+            $status = 'activo';
+        }else{
+            $status = 'inactivo';
+        }
+
+        return [
+            "name" => $this->user_name,
+            "telephone" => $this->user_telephone,
+            "email" => $this->user_email,
+            "birth_date" => $this-> user_date,
+            "status" =>$status,
+            "photo" => $this->photo
+
+        ];
     }
 }

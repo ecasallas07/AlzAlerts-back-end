@@ -14,6 +14,13 @@ class GaleryCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "title" => $this->galarie_title,
+            "description" => $this->galarie_description,
+            "tag" => $this->galarie_tag,
+            "photo" => $this->galarie_photo,
+            "user" => $this->user
+        ];
     }
 }
