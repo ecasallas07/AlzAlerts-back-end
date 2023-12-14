@@ -8,6 +8,9 @@ use App\Http\Requests\UpdateAccountRequest;
 use App\Http\Resources\AccountCollection;
 use App\Filters\AccountFilter;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+
 
 class AccountController extends Controller
 {
@@ -15,13 +18,9 @@ class AccountController extends Controller
      * Display a listing of the resource.
      */
     //El index recibe un request para filtrar por elemento
-    public function index(Request $request)
+    public function index()
     {
-        $filter = new AccountFilter();
-        $queryItems = $filter->transform($request);
-        //Params 
-        $accounts = Account::where($queryItems);
-        return new AccountCollection($accounts->paginate()->appends($request->query()));
+        return  AccountCollection::collection(Account::all());
     }
 
     /**
@@ -43,9 +42,26 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Account $account)
+    public function show(Request $request) : JsonResponse
     {
-        //
+        $filter = new AccountFilter();
+        $queryItems = $filter->transform($request);
+        $accounts = Account::where($queryItems)->get();
+
+        if($accounts->isEmpty())
+        {
+            return response()->json(['error'=> 'NO se encontraron datos'],404);
+        }
+
+        // Se usa ::collection para asegurarse de que en AccountCollection pueda reconocer el id
+        return response()->json(['data' => AccountCollection::collection($accounts)],200);
+    }
+
+    public function showId($id)
+    {
+        $account = Account::find($id);
+        //En este caso no se usa ::collection porque paso directamente el modelo
+        return response()->json(['data'=>  new AccountCollection($account)],200);
     }
 
     /**

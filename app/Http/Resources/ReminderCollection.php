@@ -14,6 +14,12 @@ class ReminderCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            "title" => $this->reminder_title,
+            "subject" => $this->reminder_subject,
+            "date" => $this->reminder_date,
+            "time" => $this->reminder_time,
+            "user" => $this->user
+        ];
     }
 }
