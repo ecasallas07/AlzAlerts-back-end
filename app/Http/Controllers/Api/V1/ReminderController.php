@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Reminder;
 use App\Http\Requests\StoreReminderRequest;
 use App\Http\Requests\UpdateReminderRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\ReminderResource;
 
 class ReminderController extends Controller
 {

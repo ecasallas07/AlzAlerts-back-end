@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ReminderCollection extends ResourceCollection
+class ReminderResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.

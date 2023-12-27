@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Filters\UserFilter;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserCollection;
+use App\Http\Resources\V1\UserResource;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
         $queryItems = $filter->transform($request);
 
         $users = User::where($queryItems);
-        return new UserCollection($users);
+        return new UserResource($users);
     }
 
 
