@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\VoiceNotes;
 use App\Http\Requests\StoreVoiceNotesRequest;
 use App\Http\Requests\UpdateVoiceNotesRequest;
+use App\Http\Controllers\Controller;
 
 class VoiceNotesController extends Controller
 {

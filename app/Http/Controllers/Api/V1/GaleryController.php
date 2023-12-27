@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Galery;
 use App\Http\Requests\StoreGaleryRequest;
 use App\Http\Requests\UpdateGaleryRequest;
 use App\Filters\GaleryFilter;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\GaleryResource;
 
 class GaleryController extends Controller
 {
@@ -40,15 +42,15 @@ class GaleryController extends Controller
     public function show(Request $request)
     {
         $filter = new GaleryFilter();
-        $queryItems = $filter->trasnform($request);
+        $queryItems = $filter->transform($request);
         $galery = Galery::where($queryItems)->get();
 
-        if($galary->isEmpty())
+        if($galery->isEmpty())
         {
             return response()->json(['error'=> 'NO se encontraron datos'],404);
 
         }
-        return reponse()->json(['data' => GaleryCollection::collection($galary)],200);
+        return response()->json(['data' => GaleryResource::collection($galery)],200);
 
     }
 

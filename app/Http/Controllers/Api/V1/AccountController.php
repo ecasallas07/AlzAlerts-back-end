@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Account;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
-use App\Http\Resources\AccountCollection;
+use App\Http\Resources\V1\AccountResource;
 use App\Filters\AccountFilter;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Collection;
+use App\Http\Controllers\Controller;
+
 
 
 
@@ -22,29 +25,19 @@ class AccountController extends Controller
     //El index recibe un request para filtrar por elemento
     public function index() :JsonResponse
     {
-        $account = Acount::latest()
+        $account = Account::latest()
             ->paginate(6)
-            ->getData(true);
+            ->get(true);
 
         $account = AccountResource::collection($account)
             ->response()
-            ->getData();
+            ->get(true);
 
             return $this->wrapResponse(Response::HTTP_OK,'Success',$account);
 
         // return  AccountCollection::collection(Account::all());
     }
 
-
-    public function wrapResponse(int $code, string $message, ?array $account = []): JsonResponse
-    {
-        $result = [
-            'code' => $code,
-            'message' => $message
-        ];
-
-        if(count())
-    }
     /**
      * Show the form for creating a new resource.
      */
@@ -64,26 +57,26 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request) : JsonResponse
+    public function show(Account $account) : JsonResponse
     {
-        $filter = new AccountFilter();
-        $queryItems = $filter->transform($request);
-        $accounts = Account::where($queryItems)->get();
+        // $filter = new AccountFilter();
+        // $queryItems = $filter->transform($request);
+        // $accounts = Account::where($queryItems)->get();
 
-        if($accounts->isEmpty())
-        {
-            return response()->json(['error'=> 'NO se encontraron datos'],404);
-        }
+        // if($accounts->isEmpty())
+        // {
+        //     return response()->json(['error'=> 'NO se encontraron datos'],404);
+        // }
 
         // Se usa ::collection para asegurarse de que en AccountCollection pueda reconocer el id
-        return response()->json(['data' => AccountCollection::collection($accounts)],200);
+        return response()->json(['data' => AccountResource::collection($account)],200);
     }
 
     public function showId($id)
     {
         $account = Account::find($id);
         //En este caso no se usa ::collection porque paso directamente el modelo
-        return response()->json(['data'=>  new AccountCollection($account)],200);
+        return response()->json(['data'=>  new AccountResource($account)],200);
     }
 
     /**

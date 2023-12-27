@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Account;
+use Illuminate\Support\Collection;
+
 
 class AccountResource extends JsonResource
 {
@@ -19,21 +21,11 @@ class AccountResource extends JsonResource
             "id" => $this->id,
             "name" => $this->account_name,
             "email" => $this->account_email,
-            "user_id" => $this->whenLoaded('user' , fn() => $this->getUsersRelation());
+            "user_id" => $this->user
         ];
     }
 
-    public function getUsersRelation() : array
-    {
-        $users = UserResource::collection($this->user()->paginate(6)->appends(request()->query))
-        ->response()
-        ->getData(true);
 
-        return [
-            'data' => $users['data'],
-            'pages' => ['links' => $users['links'], 'meta' => $users['meta']]
-        ];
-    }
 
 
 
