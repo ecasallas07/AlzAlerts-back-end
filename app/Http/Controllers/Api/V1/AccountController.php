@@ -65,13 +65,13 @@ class AccountController extends Controller
             {
                 return response()->json([
                     'error' => 'Not exists Data'
-                ]);
+                ],404);
             }else
             {
                 return response()->json([
                     'success' => true,
                     'data' => new AccountResource($request)
-                ]);
+                ],200);
 
             }
     }
@@ -102,7 +102,7 @@ class AccountController extends Controller
         return response()->json([
             'success' => true,
             'eliminate' => new AccountResource($account)
-        ]);
+        ],200);
 
 
     }

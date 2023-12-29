@@ -5,7 +5,7 @@ namespace App\Http\Resources\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class VoiceNotesCollection extends JsonResource
+class VoiceNotesResource extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
