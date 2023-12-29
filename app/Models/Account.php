@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 
-class Account extends Model
+class Account extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory;
+    use HasApiTokens;
 
     protected $fillable =[
         'account_name',
@@ -29,5 +32,5 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+
 }
