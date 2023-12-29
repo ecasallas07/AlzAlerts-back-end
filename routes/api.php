@@ -30,6 +30,8 @@ Route::group(['prefix' =>'v1'], function()
         Route::get('/',[AccountController::class,'index']);
         Route::get('/search',[AccountController::class,'show']); //http://127.0.0.1:8000/api/v1/accounts/search?name[eq]=Keven%20McDermott
         Route::get('/search/{id}',[AccountController::class,'showId']);
+        Route::post('/create',[AccountController::class,'store']);
+        Route::delete('/delete/{id}',[AccountController::class,'destroy']);
     });
 
 

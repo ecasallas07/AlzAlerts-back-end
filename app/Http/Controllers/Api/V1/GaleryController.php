@@ -17,6 +17,7 @@ class GaleryController extends Controller
      */
     public function index()
     {
+        
 
     }
 
