@@ -11,7 +11,7 @@ class StoreReminderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreReminderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'reminder_title' => 'required',
+            'reminder_subject' => 'required',
+            'reminder_date' => 'date|required',
+            'reminder_time' => 'time|required'
         ];
     }
 }

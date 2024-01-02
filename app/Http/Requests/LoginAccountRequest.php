@@ -23,7 +23,7 @@ class LoginAccountRequest extends FormRequest
     {
         return [
             'account_email' => 'email|required',
-            'password' => 'required|min:8'
+            'account_password' => 'required|min:8|regex:pattern'
         ];
     }
 }
