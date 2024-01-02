@@ -6,17 +6,18 @@ use Illuminate\Http\Request;
 
 class ApiFilter {
 
+    //Parametros  vienen de los de demas modelos
     //Parametros para filtrar por los modelos
     protected $safeParams = [
 
     ];
 
-    //
+    // Tipos de columnas
     protected $columnMap = [
 
     ];
 
-    //
+    //Los operadores de las relaciones
     protected $operatorMap = [];
 
     public function transform(Request $request)

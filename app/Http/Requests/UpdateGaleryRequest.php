@@ -22,7 +22,10 @@ class UpdateGaleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'galery_title' => 'required|min:20',
+            'galarie_description' => 'required',
+            'galarie_tag' => 'required',
+            'galarie_photo' => 'file'
         ];
     }
 }

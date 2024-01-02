@@ -11,7 +11,7 @@ class StoreVoiceNotesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreVoiceNotesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'voice_note_title' => 'required|text',
+            'voice_note_description' => 'required|text',
+            'voice_note_audio' => 'required'
         ];
     }
 }
